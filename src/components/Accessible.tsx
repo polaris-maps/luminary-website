@@ -13,6 +13,7 @@ export default function Accessible() {
 							width={1264}
 							height={580}
 							className="w-full h-auto"
+							className="w-full h-auto"
 						/>
 					</div>
 				</div>
