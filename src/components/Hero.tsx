@@ -10,8 +10,9 @@ export default function Hero() {
 							Introducing{' '}
 							<span className="text-primary font-semibold">Luminary.</span>
 						</h1>
-						<p className="mb-3 sm:mb-4 xl:mb-6">The smarter way to</p>
-						<p className="mb-6 sm:mb-8 xl:mb-10 2xl:mb-12">navigate UNC Chapel Hill.</p>
+						<p className="mb-6 sm:mb-8 xl:mb-10 2xl:mb-12">
+							The smarter way to navigate <span className="whitespace-nowrap">UNC Chapel Hill.</span>
+						</p>
 						<div className="flex flex-wrap gap-3 sm:gap-4 xl:gap-5 2xl:gap-6 text-sm sm:text-base md:text-lg xl:text-xl 2xl:text-2xl font-semibold">
 							<button className="bg-primary/35 text-primary px-3 sm:px-4 md:px-6 xl:px-8 2xl:px-10 py-2 md:py-3 xl:py-4 2xl:py-5 rounded-xl w-[110px] sm:w-[120px] md:w-[135px] xl:w-[160px] 2xl:w-[200px]">
 								About
