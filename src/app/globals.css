@@ -7,6 +7,15 @@
 
 @theme {
 	--color-primary: #0a84ff;
+
+	/* Custom breakpoints matching Google Chrome DevTools */
+	--breakpoint-xs: 320px; /* Mobile S */
+	--breakpoint-sm: 375px; /* Mobile M */
+	--breakpoint-md: 425px; /* Mobile L */
+	--breakpoint-lg: 768px; /* Tablet */
+	--breakpoint-xl: 1024px; /* Laptop */
+	--breakpoint-2xl: 1440px; /* Laptop L */
+	--breakpoint-3xl: 2560px; /* 4K */
 }
 
 @media (prefers-color-scheme: dark) {
