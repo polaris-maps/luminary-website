@@ -60,27 +60,30 @@ export default function Features() {
 	}, [emblaApi]);
 
 	return (
-		<section className="py-20" id="features">
+		<section className="py-10 sm:py-16 lg:py-20 overflow-hidden" id="features">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="relative">
 					{/* Carousel Container */}
 					<div className="overflow-hidden rounded-lg" ref={emblaRef}>
 						<div className="flex">
 							{features.map((feature) => (
-								<div key={feature.id} className="flex-[0_0_100%] px-4">
-									<div className="h-[950px] flex items-center justify-center">
-										<div className="flex flex-col items-center justify-center text-center space-y-6 max-w-4xl">
+								<div key={feature.id} className="flex-[0_0_100%] px-2 sm:px-4">
+									<div className="h-[600px] sm:h-[700px] lg:h-[800px] flex items-center justify-center">
+										<div className="flex flex-col items-center justify-center text-center space-y-4 sm:space-y-6 max-w-4xl w-full">
 											{feature.subheading && (
-												<div className="text-2xl">
+												<div className="text-lg sm:text-xl lg:text-2xl px-4">
 													{feature.subheading}
 												</div>
 											)}
-											<Image
-												src={feature.image}
-												alt={feature.alt || ''}
-												width={feature.width}
-												height={feature.height}
-											/>
+											<div className="relative w-full max-w-full">
+												<Image
+													src={feature.image}
+													alt={feature.alt || ''}
+													width={feature.width}
+													height={feature.height}
+													className="w-auto h-auto max-w-full max-h-[450px] sm:max-h-[550px] lg:max-h-[650px] mx-auto"
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -91,8 +94,7 @@ export default function Features() {
 					{/* Navigation Arrows */}
 					<button
 						onClick={scrollPrev}
-						className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-10"
-						style={{ fontSize: '24px' }}
+						className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-10 text-xl sm:text-2xl"
 						aria-label="Previous slide"
 					>
 						◀
@@ -100,8 +102,7 @@ export default function Features() {
 
 					<button
 						onClick={scrollNext}
-						className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-10"
-						style={{ fontSize: '24px' }}
+						className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors duration-200 z-10 text-xl sm:text-2xl"
 						aria-label="Next slide"
 					>
 						▶

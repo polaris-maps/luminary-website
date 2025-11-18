@@ -16,13 +16,23 @@
 	}
 }
 
+html {
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+}
+
 body {
 	font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI',
 		Roboto, 'Helvetica Neue', Arial, sans-serif;
+	overflow-x: hidden;
+	width: 100%;
+	max-width: 100vw;
 }
 
 /* Apply SF Pro font globally */
 * {
 	font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI',
 		Roboto, 'Helvetica Neue', Arial, sans-serif;
+	box-sizing: border-box;
 }
+
