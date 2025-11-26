@@ -14,7 +14,7 @@ export default function About() {
 			>
 				<h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">About Luminary</h2>
 				<p className="text-lg sm:text-xl lg:text-2xl">
-					We strive to make navigating UNC's campus easier and more accessible for all.
+					We strive to make navigating UNC&apos;s campus easier and more accessible for all.
 					Our mission is to develop an inclusive, user-friendly tool that helps
 					individuals find personalized routes tailored to their mobility needs. Together,
 					we can create a more connected and barrier-free campus experience with Luminary.

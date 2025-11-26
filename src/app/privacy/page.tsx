@@ -21,9 +21,9 @@ export default function PrivacyPolicy() {
 				<div className="prose prose-invert prose-lg max-w-none space-y-8">
 					<section>
 						<p className="text-gray-300 mb-4">
-							This privacy notice for App Team Carolina ("Organization", "we", "us" or
-							"our"), describes how and why we might collect, store, use and/or share your
-							information when you use our services ("Services"), such as when you:
+							This privacy notice for App Team Carolina (&ldquo;Organization&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or
+							&ldquo;our&rdquo;), describes how and why we might collect, store, use and/or share your
+							information when you use our services (&ldquo;Services&rdquo;), such as when you:
 						</p>
 						<ul className="list-disc pl-6 text-gray-300 space-y-2">
 							<li>Download and use our mobile application, Luminary</li>
@@ -165,7 +165,7 @@ export default function PrivacyPolicy() {
 								</li>
 								<li>
 									<strong className="text-white">Mobile Device Data:</strong> We
-									automatically collect device information such as your mobile device's
+									automatically collect device information such as your mobile device&rsquo;s
 									unique device ID.
 								</li>
 								<li>
@@ -261,7 +261,7 @@ export default function PrivacyPolicy() {
 							</li>
 						</ul>
 						<p className="text-gray-300 mt-4">
-							You can control location permissions through your device's settings. However,
+							You can control location permissions through your device&rsquo;s settings. However,
 							disabling location may limit certain features of the app.
 						</p>
 					</section>

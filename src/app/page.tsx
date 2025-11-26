@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Accessible from '@/components/Accessible';
 import About from '@/components/About';

@@ -23,9 +23,9 @@ export default function TermsAndConditions() {
 						<h2 className="text-3xl font-bold mb-4 text-white">Agreement to Terms</h2>
 						<p className="text-gray-300">
 							These Terms and Conditions constitute a legally binding agreement between you
-							and App Team Carolina ("Company", "we", "us", or "our"), concerning your
+							and App Team Carolina (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), concerning your
 							access to and use of the Luminary website and mobile application
-							(collectively, the "Services"). We are registered in North Carolina, United
+							(collectively, the &ldquo;Services&rdquo;). We are registered in North Carolina, United
 							States and have our registered office at 2501 FPG Student Union Box 350,
 							Chapel Hill, NC 27514.
 						</p>
@@ -65,8 +65,8 @@ export default function TermsAndConditions() {
 								<p>
 									Unless otherwise indicated, the Application is our proprietary property
 									and all source code, databases, functionality, software, designs, audio,
-									video, text, photographs, and graphics (collectively, the "Content") and
-									the trademarks, service marks, and logos (the "Marks") are owned or
+									video, text, photographs, and graphics (collectively, the &ldquo;Content&rdquo;) and
+									the trademarks, service marks, and logos (the &ldquo;Marks&rdquo;) are owned or
 									controlled by us and are protected by copyright and trademark laws.
 								</p>
 							</div>
