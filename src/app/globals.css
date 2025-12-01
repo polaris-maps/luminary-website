@@ -1,12 +1,15 @@
 @import 'tailwindcss';
 
 :root {
-	--background: #ffffff;
-	--foreground: #171717;
+	--background: #000000;
+	--foreground: #ededed;
 }
 
 @theme {
 	--color-primary: #0a84ff;
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-pulse-slow: pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    --animate-gradient-x: gradient-x 15s ease infinite;
 
 	/* Custom breakpoints matching Google Chrome DevTools */
 	--breakpoint-xs: 320px; /* Mobile S */
@@ -18,11 +21,28 @@
 	--breakpoint-3xl: 2560px; /* 4K */
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #000000;
-		--foreground: #ededed;
-	}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes gradient-x {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Dark mode is now the default */
+@media (prefers-color-scheme: light) {
+	/* :root {
+		--background: #ffffff;
+		--foreground: #171717;
+	} */
 }
 
 html {
@@ -36,6 +56,13 @@ body {
 	overflow-x: hidden;
 	width: 100%;
 	max-width: 100vw;
+    background: var(--background);
+    color: var(--foreground);
+    /* Subtle background noise/grid */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
 }
 
 /* Apply SF Pro font globally */
@@ -43,5 +70,46 @@ body {
 	font-family: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI',
 		Roboto, 'Helvetica Neue', Arial, sans-serif;
 	box-sizing: border-box;
+}
+
+/* Utilities for Luminary Beyond */
+.text-gradient {
+    background: linear-gradient(to right, #ffffff, #0a84ff, #ffffff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: var(--animate-gradient-x);
+}
+
+.text-glow {
+    text-shadow: 0 0 40px rgba(10, 132, 255, 0.5);
+}
+
+.hero-glow {
+    background: radial-gradient(circle at center, rgba(10, 132, 255, 0.4) 0%, transparent 70%);
+    filter: blur(100px);
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.glass-panel {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-button {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(10, 132, 255, 0.3);
 }
 

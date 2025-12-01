@@ -2,17 +2,30 @@ import Image from 'next/image';
 
 export default function Download() {
 	return (
-		<section className="mt-12 sm:mt-16 md:mt-24 lg:mt-32 xl:mt-40 2xl:mt-48">
-			<div className="max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl mx-auto px-3 sm:px-4 md:px-6 2xl:px-8 text-center">
-				<h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl 3xl:text-7xl mb-6 sm:mb-8 md:mb-12 lg:mb-16 xl:mb-20 2xl:mb-24">Download Luminary Today</h2>
-				<div className="flex justify-center">
-					<Image
-						src="/appstore.png"
-						alt="Download on the App Store"
-						height={78}
-						width={264}
-						className="w-auto h-auto max-w-[180px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[264px] xl:max-w-[320px] 2xl:max-w-[400px] 3xl:max-w-[500px]"
-					/>
+		<section className="relative py-32 sm:py-48 overflow-hidden" id="download">
+            {/* Background Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/20 blur-[150px] rounded-full pointer-events-none"></div>
+
+			<div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+				<h2 className="text-5xl sm:text-7xl md:text-8xl font-bold text-white mb-8 tracking-tight">
+                    Ready to <br className="hidden sm:block" />
+                    <span className="text-gradient">Navigate?</span>
+                </h2>
+                <p className="text-xl text-neutral-400 mb-12 max-w-2xl mx-auto">
+                    Join thousands of students navigating UNC with confidence. Download Luminary today.
+                </p>
+				
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+					<button className="group relative inline-flex items-center justify-center">
+                        <div className="absolute inset-0 bg-white/20 blur-xl group-hover:bg-white/30 transition-colors duration-300 rounded-xl"></div>
+						<Image
+							src="/appstore.png"
+							alt="Download on the App Store"
+							height={78}
+							width={264}
+							className="relative w-auto h-16 sm:h-20 hover:scale-105 transition-transform duration-300"
+						/>
+					</button>
 				</div>
 			</div>
 		</section>

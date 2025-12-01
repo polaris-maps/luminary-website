@@ -1,14 +1,20 @@
 export default function About() {
 	return (
-		<section className="mt-0" id="about">
-			<div className="max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl mx-auto px-3 sm:px-4 md:px-6 2xl:px-8">
-				<h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl 3xl:text-7xl font-bold mb-3 sm:mb-4 xl:mb-6 2xl:mb-8">About Luminary</h2>
-				<p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-5xl">
-					We strive to make navigating UNC&apos;s campus easier and more accessible for all.
-					Our mission is to develop an inclusive, user-friendly tool that helps
-					individuals find personalized routes tailored to their mobility needs. Together,
-					we can create a more connected and barrier-free campus experience with Luminary.
-				</p>
+		<section className="relative py-32 px-4" id="about">
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-[60vw] h-[60vw] bg-blue-600/10 blur-[120px] rounded-full"></div>
+            </div>
+            
+			<div className="max-w-5xl mx-auto relative z-10">
+                <div className="glass-panel rounded-3xl p-8 sm:p-12 md:p-20 text-center border-white/5 bg-black/40">
+                    <h2 className="text-xs sm:text-sm font-mono text-blue-400 tracking-widest uppercase mb-8">Our Mission</h2>
+                    <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight text-neutral-400">
+                        We believe navigation should be <span className="text-white">limitless</span>. 
+                        Luminary is designed to empower every student at UNC Chapel Hill with 
+                        <span className="text-blue-400"> personalized, accessible routes</span>. 
+                        Because a barrier-free campus is a connected campus.
+                    </p>
+                </div>
 			</div>
 		</section>
 	);

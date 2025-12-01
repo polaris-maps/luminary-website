@@ -8,16 +8,14 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
 	return (
-		<>
-			<div className="text-white font-sans py-20 overflow-x-hidden">
-				<Hero />
-				<ScrollIndicator />
-				<Accessible />
-				<About />
-				<Features />
-				<Download />
-			</div>
+		<main className="min-h-screen text-white font-sans overflow-x-hidden selection:bg-blue-500/30 selection:text-blue-200">
+			<Hero />
+			<ScrollIndicator />
+            <About />
+			<Features />
+			<Accessible />
+			<Download />
 			<Footer />
-		</>
+		</main>
 	);
 }
