@@ -1,86 +1,128 @@
 'use client';
+
 import Image from 'next/image';
+import { useRef, useEffect, useState } from 'react';
 
 const features = [
 	{
 		id: 1,
-        title: "Route Customization",
-		description: 'Customize obstacle preferences specific to your mobility needs. Avoid stairs, steep hills, or construction zones with ease.',
+		number: '01',
+		title: 'Route Customization',
+		description:
+			'Customize obstacle preferences specific to your mobility needs. Avoid stairs, steep hills, or construction zones with ease.',
 		image: '/features/2.png',
 		width: 700,
 		height: 600,
 	},
 	{
 		id: 2,
-        title: "Saved Places",
-		description: 'Save frequently visited locations for quick access. Your dorm, favorite library, or dining hall is just a tap away.',
+		number: '02',
+		title: 'Saved Places',
+		description:
+			'Save frequently visited locations for quick access. Your dorm, favorite library, or dining hall is just a tap away.',
 		image: '/features/3.png',
 		width: 360,
 		height: 600,
 	},
 	{
 		id: 3,
-        title: "Community Alerts",
-		description: 'Get real-time alerts from other users about temporary obstacles, elevators out of service, or blocked paths.',
+		number: '03',
+		title: 'Community Alerts',
+		description:
+			'Get real-time alerts from other users about temporary obstacles, elevators out of service, or blocked paths.',
 		image: '/features/4.png',
 		width: 700,
 		height: 600,
 	},
 	{
 		id: 4,
-        title: "Quick Reporting",
-		description: 'Help the community by quickly reporting issues you encounter. A barrier-free campus starts with us.',
+		number: '04',
+		title: 'Quick Reporting',
+		description:
+			'Help the community by quickly reporting issues you encounter. A barrier-free campus starts with us.',
 		image: '/features/5.png',
 		width: 700,
 		height: 600,
 	},
 ];
 
+function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
+	const ref = useRef<HTMLDivElement>(null);
+	const [isVisible, setIsVisible] = useState(false);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) setIsVisible(true);
+			},
+			{ threshold: 0.15 }
+		);
+		if (ref.current) observer.observe(ref.current);
+		return () => observer.disconnect();
+	}, []);
+
+	return (
+		<div
+			ref={ref}
+			className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center"
+		>
+			{/* Text */}
+			<div
+				className={`space-y-4 transition-opacity duration-700 ${
+					isVisible ? 'opacity-100' : 'opacity-0'
+				}`}
+			>
+				<span className="font-[family-name:var(--font-mono)] text-sm text-[var(--accent-warm)] tracking-wider">
+					{feature.number}
+				</span>
+				<h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl lg:text-4xl text-[var(--foreground)] leading-tight">
+					{feature.title}
+				</h3>
+				<p className="text-base lg:text-lg text-[var(--text-secondary)] leading-relaxed max-w-md">
+					{feature.description}
+				</p>
+			</div>
+
+			{/* Image */}
+			<div
+				className={`w-full flex justify-center transition-opacity duration-700 delay-150 ${
+					isVisible ? 'opacity-100' : 'opacity-0'
+				}`}
+			>
+				<div className="relative group w-full max-w-sm">
+					<Image
+						src={feature.image}
+						alt={feature.title}
+						width={feature.width}
+						height={feature.height}
+						className="w-full h-auto rounded-lg transform group-hover:scale-[1.01] transition-transform duration-500"
+					/>
+				</div>
+			</div>
+		</div>
+	);
+}
+
 export default function Features() {
 	return (
-		<section className="py-24 relative" id="features">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-32">
-                    <h2 className="text-3xl sm:text-5xl font-bold text-white mb-4">Powered by Intelligence</h2>
-                    <p className="text-neutral-400 text-lg sm:text-xl max-w-2xl mx-auto">
-                        Everything you need to navigate with confidence.
-                    </p>
-                </div>
+		<section className="py-24 lg:py-32 relative" id="features">
+			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+				{/* Section header */}
+				<div className="mb-20 lg:mb-28">
+					<h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl lg:text-5xl text-[var(--foreground)] mb-5 tracking-tight">
+						Powered by intelligence.
+					</h2>
+					<p className="text-[var(--text-secondary)] text-base sm:text-lg max-w-xl">
+						Everything you need to navigate campus with confidence, designed around real student needs.
+					</p>
+				</div>
 
-                <div className="space-y-32">
-                    {features.map((feature, index) => (
-                        <div 
-                            key={feature.id} 
-                            className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-24 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
-                        >
-                            {/* Text Content */}
-                            <div className="flex-1 space-y-6">
-                                <div className="inline-block p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20">
-                                    <span className="text-blue-400 font-mono text-sm">0{feature.id}</span>
-                                </div>
-                                <h3 className="text-3xl sm:text-4xl font-bold text-white">{feature.title}</h3>
-                                <p className="text-lg text-neutral-400 leading-relaxed">{feature.description}</p>
-                            </div>
-
-                            {/* Image Content */}
-                            <div className="flex-1 w-full flex justify-center">
-                                <div className="relative group w-full max-w-md">
-                                    <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                    <div className="relative rounded-[2rem] overflow-hidden border border-white/10 glass-panel p-4">
-                                        <Image
-                                            src={feature.image}
-                                            alt={feature.title}
-                                            width={feature.width}
-                                            height={feature.height}
-                                            className="w-full h-auto rounded-xl transform group-hover:scale-[1.02] transition-transform duration-500"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
+				<div className="space-y-24 lg:space-y-32">
+					{features.map((feature) => (
+						<FeatureCard key={feature.id} feature={feature} />
+					))}
+				</div>
+			</div>
 		</section>
 	);
 }
