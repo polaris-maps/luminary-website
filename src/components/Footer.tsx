@@ -3,8 +3,17 @@ import Link from 'next/link';
 
 export default function Footer() {
 	return (
-		<footer className="py-12 px-4 border-t border-[var(--border)]">
-			<div className="max-w-6xl mx-auto">
+		<footer className="relative pt-16 pb-12 px-4">
+			{/* Gradient top edge instead of hard border */}
+			<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--border-hover)] to-transparent" />
+			<div
+				className="absolute top-0 left-0 right-0 h-24 pointer-events-none"
+				style={{
+					background: 'linear-gradient(to bottom, rgba(232, 230, 225, 0.02) 0%, transparent 100%)',
+				}}
+			/>
+
+			<div className="max-w-6xl mx-auto relative">
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
 					{/* Brand */}
 					<div>
@@ -26,13 +35,13 @@ export default function Footer() {
 							Product
 						</h4>
 						<div className="flex flex-col gap-2.5">
-							<a href="#features" className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">
+							<a href="#features" className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors link-underline w-fit">
 								Features
 							</a>
-							<a href="#accessible" className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">
+							<a href="#accessible" className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors link-underline w-fit">
 								Accessibility
 							</a>
-							<a href="#download" className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors">
+							<a href="#download" className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors link-underline w-fit">
 								Download
 							</a>
 						</div>
@@ -46,13 +55,13 @@ export default function Footer() {
 						<div className="flex flex-col gap-2.5">
 							<Link
 								href="/privacy"
-								className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors"
+								className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors link-underline w-fit"
 							>
 								Privacy Policy
 							</Link>
 							<Link
 								href="/terms"
-								className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors"
+								className="text-sm text-[var(--text-secondary)] hover:text-[var(--foreground)] transition-colors link-underline w-fit"
 							>
 								Terms & Conditions
 							</Link>
@@ -61,11 +70,12 @@ export default function Footer() {
 				</div>
 
 				{/* Bottom bar */}
-				<div className="pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row justify-between items-center gap-4">
-					<p className="text-xs text-[var(--text-tertiary)]">
+				<div className="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+					<div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--border)] to-transparent absolute left-0 right-0" />
+					<p className="text-xs text-[var(--text-tertiary)] pt-4">
 						&copy; {new Date().getFullYear()} App Team Carolina. All rights reserved.
 					</p>
-					<p className="text-xs text-[var(--text-tertiary)]">
+					<p className="text-xs text-[var(--text-tertiary)] pt-4">
 						Chapel Hill, NC
 					</p>
 				</div>

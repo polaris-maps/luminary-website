@@ -1,51 +1,92 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import BorderGlow from './BorderGlow';
 
-export default function Hero() {
-	const [mounted, setMounted] = useState(false);
+const headlineWords = ['Navigate', 'without', 'limits.'];
 
-	useEffect(() => {
-		setMounted(true);
-	}, []);
+export default function Hero() {
+	const sectionRef = useRef<HTMLElement>(null);
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ['start start', 'end start'],
+	});
+	const phoneY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+	const orbScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
 	return (
-		<section className="relative min-h-screen flex items-center px-4 overflow-hidden">
-			{/* Subtle topo texture on background */}
+		<section ref={sectionRef} className="relative min-h-screen flex items-center px-4 overflow-hidden">
+			{/* Ambient gradient orbs */}
+			<motion.div
+				style={{ scale: orbScale }}
+				className="absolute inset-0 pointer-events-none overflow-hidden"
+			>
+				<div
+					className="absolute -top-[20%] -left-[10%] w-[600px] h-[600px] rounded-full opacity-[0.07]"
+					style={{
+						background: 'radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)',
+						animation: 'float 8s ease-in-out infinite',
+					}}
+				/>
+				<div
+					className="absolute top-[10%] -right-[5%] w-[500px] h-[500px] rounded-full opacity-[0.05]"
+					style={{
+						background: 'radial-gradient(circle, var(--accent-warm) 0%, transparent 70%)',
+						animation: 'float-reverse 10s ease-in-out infinite',
+					}}
+				/>
+				<div
+					className="absolute bottom-[5%] left-[30%] w-[400px] h-[400px] rounded-full opacity-[0.04]"
+					style={{
+						background: 'radial-gradient(circle, var(--accent-green) 0%, transparent 70%)',
+						animation: 'float 12s ease-in-out infinite 2s',
+					}}
+				/>
+			</motion.div>
+
 			<div className="absolute inset-0 topo-texture" />
 
 			<div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center pt-24 lg:pt-0">
 				{/* Text content */}
 				<div className="space-y-8">
-					{/* Headline */}
-					<h1
-						className={`font-[family-name:var(--font-serif)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em] ${
-							mounted
-								? 'animate-[reveal_0.8s_ease-out_0.2s_both]'
-								: 'opacity-0'
-						}`}
-					>
-						Navigate<br />
-						without limits.
+					{/* Staggered headline */}
+					<h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em]">
+						{headlineWords.map((word, i) => (
+							<motion.span
+								key={word}
+								initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+								animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+								transition={{
+									duration: 0.7,
+									delay: 0.3 + i * 0.15,
+									ease: [0.22, 1, 0.36, 1],
+								}}
+								className="inline-block mr-[0.3em]"
+							>
+								{word}
+							</motion.span>
+						))}
 					</h1>
 
 					{/* Subheadline */}
-					<p
-						className={`text-base sm:text-lg text-[var(--text-secondary)] max-w-md leading-relaxed transition-opacity duration-700 delay-500 ${
-							mounted ? 'opacity-100' : 'opacity-0'
-						}`}
+					<motion.p
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+						className="text-base sm:text-lg text-[var(--text-secondary)] max-w-md leading-relaxed"
 					>
 						The smarter, accessible way to navigate UNC Chapel Hill.
 						Personalized routes tailored to your mobility needs.
-					</p>
+					</motion.p>
 
 					{/* CTA */}
-					<div
-						className={`flex flex-col sm:flex-row items-start gap-4 transition-opacity duration-700 delay-700 ${
-							mounted ? 'opacity-100' : 'opacity-0'
-						}`}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+						className="flex flex-col sm:flex-row items-start gap-4"
 					>
 						<BorderGlow borderRadius={12} backgroundColor="#000000" edgeSensitivity={40} glowColor="210 100 80" animated>
 							<a
@@ -60,15 +101,25 @@ export default function Hero() {
 								Download for iOS
 							</a>
 						</BorderGlow>
-					</div>
+					</motion.div>
 				</div>
 
-				{/* Phone mockup */}
-				<div
-					className={`relative flex items-center justify-center transition-opacity duration-1000 delay-500 ${
-						mounted ? 'opacity-100' : 'opacity-0'
-					}`}
+				{/* Phone mockup with parallax and glow */}
+				<motion.div
+					initial={{ opacity: 0, scale: 0.95 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+					style={{ y: phoneY }}
+					className="relative flex items-center justify-center"
 				>
+					{/* Radial glow behind phone */}
+					<div
+						className="absolute inset-0 -inset-x-12"
+						style={{
+							background: 'radial-gradient(ellipse at center, rgba(75, 156, 211, 0.08) 0%, transparent 65%)',
+							animation: 'pulse-glow 4s ease-in-out infinite',
+						}}
+					/>
 					<div className="relative w-full max-w-[420px] sm:max-w-[500px] md:max-w-[560px] lg:max-w-none lg:scale-[1.35] lg:origin-center">
 						<Image
 							src="/hero.png"
@@ -76,10 +127,10 @@ export default function Hero() {
 							width={1000}
 							height={1000}
 							priority
-							className="w-full h-auto"
+							className="w-full h-auto drop-shadow-2xl"
 						/>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	);

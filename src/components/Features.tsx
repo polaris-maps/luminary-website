@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const features = [
 	{
@@ -46,48 +47,46 @@ const features = [
 	},
 ];
 
-function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
+function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index: number }) {
 	const ref = useRef<HTMLDivElement>(null);
-	const [isVisible, setIsVisible] = useState(false);
-
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) setIsVisible(true);
-			},
-			{ threshold: 0.15 }
-		);
-		if (ref.current) observer.observe(ref.current);
-		return () => observer.disconnect();
-	}, []);
+	const isInView = useInView(ref, { once: true, margin: '-80px' });
+	const isReversed = index % 2 !== 0;
 
 	return (
 		<div
 			ref={ref}
-			className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center"
+			className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${
+				isReversed ? 'lg:[direction:rtl]' : ''
+			}`}
 		>
 			{/* Text */}
-			<div
-				className={`space-y-4 transition-opacity duration-700 ${
-					isVisible ? 'opacity-100' : 'opacity-0'
-				}`}
+			<motion.div
+				initial={{ opacity: 0, x: isReversed ? 40 : -40 }}
+				animate={isInView ? { opacity: 1, x: 0 } : {}}
+				transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+				className={`space-y-4 relative ${isReversed ? 'lg:[direction:ltr]' : ''}`}
 			>
-				<span className="font-[family-name:var(--font-mono)] text-sm text-[var(--accent-warm)] tracking-wider">
+				{/* Large decorative number */}
+				<span className="absolute -top-8 -left-2 font-[family-name:var(--font-mono)] text-[6rem] sm:text-[8rem] leading-none text-white/[0.03] font-bold select-none pointer-events-none">
 					{feature.number}
 				</span>
-				<h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl lg:text-4xl text-[var(--foreground)] leading-tight">
+				<span className="font-[family-name:var(--font-mono)] text-sm text-[var(--accent-warm)] tracking-wider relative">
+					{feature.number}
+				</span>
+				<h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl lg:text-4xl text-[var(--foreground)] leading-tight relative">
 					{feature.title}
 				</h3>
-				<p className="text-base lg:text-lg text-[var(--text-secondary)] leading-relaxed max-w-md">
+				<p className="text-base lg:text-lg text-[var(--text-secondary)] leading-relaxed max-w-md relative">
 					{feature.description}
 				</p>
-			</div>
+			</motion.div>
 
-			{/* Image */}
-			<div
-				className={`w-full flex justify-center transition-opacity duration-700 delay-150 ${
-					isVisible ? 'opacity-100' : 'opacity-0'
-				}`}
+			{/* Image in glass card */}
+			<motion.div
+				initial={{ opacity: 0, x: isReversed ? -40 : 40 }}
+				animate={isInView ? { opacity: 1, x: 0 } : {}}
+				transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+				className={`w-full flex justify-center ${isReversed ? 'lg:[direction:ltr]' : ''}`}
 			>
 				<div className="relative group w-full max-w-sm">
 					<Image
@@ -95,31 +94,44 @@ function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
 						alt={feature.title}
 						width={feature.width}
 						height={feature.height}
-						className="w-full h-auto rounded-lg transform group-hover:scale-[1.01] transition-transform duration-500"
+						className="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-500"
 					/>
 				</div>
-			</div>
+			</motion.div>
 		</div>
 	);
 }
 
 export default function Features() {
+	const headerRef = useRef<HTMLDivElement>(null);
+	const headerInView = useInView(headerRef, { once: true, margin: '-80px' });
+
 	return (
 		<section className="py-24 lg:py-32 relative" id="features">
 			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Section header */}
-				<div className="mb-20 lg:mb-28">
-					<h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl lg:text-5xl text-[var(--foreground)] mb-5 tracking-tight">
+				<div ref={headerRef} className="mb-20 lg:mb-28">
+					<motion.h2
+						initial={{ opacity: 0, y: 30 }}
+						animate={headerInView ? { opacity: 1, y: 0 } : {}}
+						transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+						className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl lg:text-5xl text-[var(--foreground)] mb-5 tracking-tight"
+					>
 						Powered by intelligence.
-					</h2>
-					<p className="text-[var(--text-secondary)] text-base sm:text-lg max-w-xl">
+					</motion.h2>
+					<motion.p
+						initial={{ opacity: 0, y: 20 }}
+						animate={headerInView ? { opacity: 1, y: 0 } : {}}
+						transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+						className="text-[var(--text-secondary)] text-base sm:text-lg max-w-xl"
+					>
 						Everything you need to navigate campus with confidence, designed around real student needs.
-					</p>
+					</motion.p>
 				</div>
 
 				<div className="space-y-24 lg:space-y-32">
-					{features.map((feature) => (
-						<FeatureCard key={feature.id} feature={feature} />
+					{features.map((feature, index) => (
+						<FeatureCard key={feature.id} feature={feature} index={index} />
 					))}
 				</div>
 			</div>
