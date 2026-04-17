@@ -32,34 +32,6 @@ export default function Download() {
         />
       </div>
 
-      {/* Animated concentric rings */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        {[...Array(4)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ scale: 0.6, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{
-              duration: 1.2,
-              delay: 0.2 + i * 0.15,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="absolute rounded-full border border-white/[0.03]"
-            style={{
-              width: `${280 + i * 160}px`,
-              height: `${280 + i * 160}px`,
-            }}
-          />
-        ))}
-        {/* Pulsing ring */}
-        <div
-          className="absolute w-[200px] h-[200px] rounded-full border border-[var(--accent-warm)]/10"
-          style={{
-            animation: isInView ? "ring-pulse 3s ease-in-out infinite" : "none",
-          }}
-        />
-      </div>
-
       <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
